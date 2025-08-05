@@ -98,7 +98,13 @@ const ContactSection = () => {
                     {info.href !== "#" ? (
                       <a
                         href={info.href}
-                        className="text-muted-foreground hover:text-primary transition-colors duration-300 break-all"
+                        onClick={(e) => {
+                          if (info.href.startsWith('mailto:')) {
+                            e.preventDefault();
+                            window.location.href = info.href;
+                          }
+                        }}
+                        className="text-muted-foreground hover:text-primary transition-colors duration-300 break-all cursor-pointer"
                       >
                         {info.value}
                       </a>
@@ -129,12 +135,10 @@ const ContactSection = () => {
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-primary group"
-                asChild
+                onClick={() => window.location.href = "mailto:krithikus2004@gmail.com"}
               >
-                <a href="mailto:krithikus2004@gmail.com">
-                  <Send className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform duration-300" />
-                  Send Message
-                </a>
+                <Send className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform duration-300" />
+                Send Message
               </Button>
             </motion.div>
           </motion.div>
