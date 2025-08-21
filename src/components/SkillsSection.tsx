@@ -20,49 +20,49 @@ const SkillsSection = () => {
       icon: Server,
       title: "Backend",
       skills: ["Node.js", "Express.js", "REST APIs", "JWT/Auth", "Middleware"],
-      color: "text-emerald-500",
-      bgColor: "bg-emerald-500/10",
-      hoverColor: "hover:bg-emerald-500/20"
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+      hoverColor: "hover:bg-primary/20"
     },
     {
       icon: Globe,
       title: "Frontend",
       skills: ["React.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5"],
-      color: "text-blue-500",
-      bgColor: "bg-blue-500/10",
-      hoverColor: "hover:bg-blue-500/20"
+      color: "text-secondary",
+      bgColor: "bg-secondary/10",
+      hoverColor: "hover:bg-secondary/20"
     },
     {
       icon: Database,
       title: "Database",
       skills: ["MongoDB (Mongoose, Aggregation, Indexing)", "Firebase (Auth, Storage)"],
-      color: "text-purple-500",
-      bgColor: "bg-purple-500/10",
-      hoverColor: "hover:bg-purple-500/20"
+      color: "text-accent",
+      bgColor: "bg-accent/10",
+      hoverColor: "hover:bg-accent/20"
     },
     {
       icon: TestTube,
       title: "Testing & Tools",
       skills: ["Insomnia", "Postman", "Git & GitHub"],
-      color: "text-orange-500",
-      bgColor: "bg-orange-500/10",
-      hoverColor: "hover:bg-orange-500/20"
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+      hoverColor: "hover:bg-primary/20"
     },
     {
       icon: Cloud,
       title: "Deployment & DevOps",
       skills: ["Render", "CI/CD basics", "Environment Configs"],
-      color: "text-cyan-500",
-      bgColor: "bg-cyan-500/10",
-      hoverColor: "hover:bg-cyan-500/20"
+      color: "text-secondary",
+      bgColor: "bg-secondary/10",
+      hoverColor: "hover:bg-secondary/20"
     },
     {
       icon: Brain,
       title: "Other (Supporting)",
       skills: ["Python", "Flask", "Machine Learning (scikit-learn, model deployment)"],
-      color: "text-pink-500",
-      bgColor: "bg-pink-500/10",
-      hoverColor: "hover:bg-pink-500/20"
+      color: "text-accent",
+      bgColor: "bg-accent/10",
+      hoverColor: "hover:bg-accent/20"
     }
   ];
 
@@ -136,22 +136,42 @@ const SkillsSection = () => {
                     </div>
 
                     {/* Skills List */}
-                    <div className="space-y-2">
+                    <div className="flex flex-wrap gap-2">
                       {category.skills.map((skill, skillIndex) => (
                         <motion.div
                           key={skillIndex}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                           transition={{ 
-                            delay: index * 0.1 + skillIndex * 0.05,
-                            duration: 0.4 
+                            delay: index * 0.1 + skillIndex * 0.08,
+                            duration: 0.5,
+                            ease: "easeOut"
                           }}
-                          className="flex items-center space-x-2"
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          className="group/skill"
                         >
-                          <div className={`w-2 h-2 ${category.color.replace('text-', 'bg-')} rounded-full`}></div>
-                          <span className="text-muted-foreground text-sm leading-relaxed">
-                            {skill}
-                          </span>
+                          <div className={`
+                            px-3 py-2 rounded-lg text-xs font-medium
+                            ${category.bgColor} ${category.hoverColor}
+                            border border-border/50
+                            backdrop-filter backdrop-blur-sm
+                            transition-all duration-300
+                            hover:border-border
+                            hover:shadow-lg
+                            cursor-default
+                            relative overflow-hidden
+                          `}>
+                            {/* Subtle glow effect on hover */}
+                            <div className={`
+                              absolute inset-0 opacity-0 group-hover/skill:opacity-20 
+                              transition-opacity duration-300
+                              ${category.color.replace('text-', 'bg-')}
+                            `}></div>
+                            
+                            <span className={`relative z-10 ${category.color} group-hover/skill:text-foreground transition-colors duration-300`}>
+                              {skill}
+                            </span>
+                          </div>
                         </motion.div>
                       ))}
                     </div>
